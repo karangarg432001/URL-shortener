@@ -1,14 +1,20 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-
+from django.db import connection
 # Create your views here.
 def xyz(request):
     return render(request, "index.html")
 
 def signUp(request):
-    print("signup method is working")
-    i = 10
-    i =i+20
-    i=i+30
-    print(i)
-    return render(request, "index.html")
+    email = request.GET['email']
+    psw = request.GET['pswname']
+    cursor = connection.cursor()
+    query = "insert into users (email, password) values (%s, %s)"
+    value = (email, psw)
+    cursor.execute(query, value)
+    print(cursor.rowcount)
+    # query = "Select * from city where name='"+email+"'"
+    # cursor.execute(query)
+    # row = cursor.fetchone()
+    # print(row)
+    data = {"email":email, "password":psw}
+    return render(request, "first.html", data)
