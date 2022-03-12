@@ -1,4 +1,5 @@
-from app1.views import xyz, signUp, signin, login
+from app1.views import xyz, signUp, signin, login, otpVerification, urlshortner
+
 """PythonProjectFeb URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -23,4 +24,6 @@ urlpatterns = [
     path('signin/', signin),
     path('signUp', signUp),
     path('login', login),
+    path('otpVerification', otpVerification),
+    path('urlshortner', urlshortner),
 ]
