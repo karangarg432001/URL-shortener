@@ -1,4 +1,4 @@
-from app1.views import xyz, signUp, signin, login, otpVerification, urlshortner
+from app1.views import xyz, signUp, signin, login, otpVerification, urlshortner, handlingShortUrl
 
 """PythonProjectFeb URL Configuration
 
@@ -26,4 +26,5 @@ urlpatterns = [
     path('login', login),
     path('otpVerification', otpVerification),
     path('urlshortner', urlshortner),
+    path('<url>/', handlingShortUrl),
 ]

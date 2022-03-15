@@ -1,6 +1,6 @@
 import string
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db import connection
 from django.core.mail import send_mail
 import random
@@ -9,6 +9,18 @@ import random
 
 def xyz(request):
     return render(request, "home.html")
+
+def handlingShortUrl(request, **kwargs):
+    url = kwargs.get('url')
+    cursor = connection.cursor()
+    query = "select long_link from links where short_link='" + url + "'"
+    cursor.execute(query)
+    data = cursor.fetchone()
+    print(data)
+    if data is None:
+        return render(request, "home.html")
+    else:
+        return redirect(data[0])
 
 def signUp(request):
     email = request.POST['email']
