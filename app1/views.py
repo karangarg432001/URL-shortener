@@ -64,8 +64,12 @@ def login(request):
             data = {"email": "You are not verified user", "password": ""}
             return render(request, "first.html", data)
         if data[1] == psw:
-            data = {"email": "Login Success", "password": ""}
-            return render(request, "first.html", data)
+            cursor = connection.cursor()
+            query1 = "select * from links where created_by  ='" + email + "'"
+            cursor.execute(query1)
+            data = cursor.fetchall()
+            data = {"data": data}
+            return render(request, "AfterLogin.html", data)
         else:
             data = {"email": "Password is not correct", "password": ""}
             return render(request, "first.html", data)
