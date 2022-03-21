@@ -53,9 +53,10 @@ def login(request):
     email = request.POST['email']
     psw = request.POST['psw']
     cursor = connection.cursor()
-    query1 = "select * from users where email  ='" + email + "'"
-    cursor.execute(query1)
+    values =[email]
+    res = cursor.callproc('signin', values)
     data = cursor.fetchone()
+
     if data is None:
         data = {"email": "Not SignedUP", "password": ""}
         return render(request, "first.html", data)
